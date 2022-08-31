@@ -115,7 +115,7 @@ function mapStateToProps(state) {
 WalletForm.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  exchangeRates: PropTypes.shape({}),
+  exchangeRates: PropTypes.shape({}).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
