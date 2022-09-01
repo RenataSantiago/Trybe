@@ -27,11 +27,11 @@ class Table extends Component {
                 <td>{e.description}</td>
                 <td>{e.tag}</td>
                 <td>{e.method}</td>
-                <td>{e.value}</td>
+                <td>{Number(e.value).toFixed(2)}</td>
                 <td>{e.currency}</td>
-                <td>{e.exchangeRates[e.currency].ask}</td>
-                <td>{(e.exchangeRates[e.currency].ask) * (e.value)}</td>
-                <td>BRL</td>
+                <td>{Number((e.exchangeRates[e.currency].ask)).toFixed(2)}</td>
+                <td>{Number((e.exchangeRates[e.currency].ask) * e.value).toFixed(2)}</td>
+                <td>{e.exchangeRates[e.currency].name}</td>
               </tr>
             ))}
           </tbody>
@@ -54,7 +54,7 @@ function mapStateToProps(state) {
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   // currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // exchangeRates: PropTypes.shape({}).isRequired,
+  exchangeRates: PropTypes.shape({}).isRequired,
   // dispatch: PropTypes.func.isRequired,
 };
 
