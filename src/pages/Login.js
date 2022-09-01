@@ -22,8 +22,8 @@ class Login extends React.Component {
     event.preventDefault();
     const { email } = this.state;
     const { dispatch, history } = this.props;
-    history.push('/carteira');
     dispatch(userData({ email }));
+    history.push('/carteira');
   };
 
   handleButton = () => {
@@ -40,6 +40,7 @@ class Login extends React.Component {
     const { email, password, buttonIsDisabled } = this.state;
     return (
       <form>
+        Email
         <input
           data-testid="email-input"
           type="email"
@@ -47,6 +48,9 @@ class Login extends React.Component {
           value={ email }
           onChange={ this.handleChange }
         />
+        <br />
+        <br />
+        Senha
         <input
           data-testid="password-input"
           type="password"
