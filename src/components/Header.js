@@ -24,4 +24,5 @@ const mapStateToProps = (state) => ({
   email: state.user.email,
   despesaTotal: state.wallet.despesaTotal,
 });
+
 export default connect(mapStateToProps)(Header);
