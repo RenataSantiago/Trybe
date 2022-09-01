@@ -23,7 +23,7 @@ export const walletDataThunk = () => async (dispatch) => {
 export const despesa = (objDespesa) => {
   const despesaArray = objDespesa.expenses
     .map((e) => Number(e.value) * Number(e.exchangeRates[e.currency].ask));
-  const despesaTotal = despesaArray.reduce((soma, atual) => atual + soma);
+  const despesaTotal = despesaArray.reduce((soma, atual) => (atual + soma), 0);
   return {
     type: DESPESA,
     objDespesa: { ...objDespesa, despesaTotal },

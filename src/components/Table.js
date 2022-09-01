@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { despesa } from '../redux/actions';
 
 class Table extends Component {
+  btnDelete = (e) => {
+    const { dispatch, expenses } = this.props;
+    const arr = expenses.filter((item) => item.id !== e.id);
+    dispatch(despesa({ expenses: arr }));
+  };
+
+  btnEdit = () => {
+
+  };
+
   render() {
     const { expenses } = this.props;
     return (
@@ -32,6 +43,24 @@ class Table extends Component {
                 <td>{Number((e.exchangeRates[e.currency].ask)).toFixed(2)}</td>
                 <td>{Number((e.exchangeRates[e.currency].ask) * e.value).toFixed(2)}</td>
                 <td>{e.exchangeRates[e.currency].name}</td>
+                <td>
+                  <button
+                    data-testid="delete-btn"
+                    type="button"
+                    onClick={ () => this.btnDelete(e) }
+                  >
+                    Delete
+                  </button>
+                </td>
+                <td>
+                  <button
+                    data-testid="edit-btn"
+                    type="button"
+                    onClick={ () => this.btnEdit(e) }
+                  >
+                    Edit
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -55,7 +84,7 @@ Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   // currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   exchangeRates: PropTypes.shape({}).isRequired,
-  // dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Table);
