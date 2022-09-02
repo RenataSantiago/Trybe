@@ -24,11 +24,6 @@ export const despesa = (objDespesa) => {
   const despesaArray = objDespesa.expenses
     .map((e) => Number(e.value) * Number(e.exchangeRates[e.currency].ask));
   const despesaTotal = despesaArray.reduce((soma, atual) => (atual + soma), 0);
-  const array = [...objDespesa.expenses];
-  objDespesa.expenses.forEach((element, index) => {
-    array[index] = objDespesa.expenses.find((e) => e.id === index);
-  });
-  objDespesa = { ...objDespesa, expenses: array };
   return {
     type: DESPESA,
     objDespesa: { ...objDespesa, despesaTotal },

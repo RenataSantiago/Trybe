@@ -63,8 +63,12 @@ class WalletForm extends Component {
       exchangeRates,
       id: idToEdit,
     }];
+    const array = [...arr2];
+    arr2.forEach((element, i) => {
+      array[i] = arr2.find((e) => i === e.id);
+    });
     this.setState({ value: '', description: '', toEdit: false });
-    dispatch(despesa({ expenses: arr2 }));
+    dispatch(despesa({ expenses: array }));
   };
 
   editXablau() {
