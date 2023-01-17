@@ -1,0 +1,14 @@
+body {
+
+  --bg_size: 100%;
+  background: url('../images/background.png');
+  background-color: rgb(230, 230, 150);
+  background-size: var(--bg_size);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+}

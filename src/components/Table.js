@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { despesa, walletData } from '../redux/actions';
+import Button from './Button';
+import '../styles/table.css';
 
 class Table extends Component {
-  btnDelete = (e) => {
-    const { dispatch, expenses } = this.props;
-    const arr = expenses.filter((item) => item.id !== e.id);
-    dispatch(despesa({ expenses: arr }));
-  };
-
-  btnEdit = (e) => {
-    const { dispatch } = this.props;
-    dispatch(walletData({ editor: true, idToEdit: e.id }));
-  };
-
   render() {
     const { expenses } = this.props;
     return (
       <div>
-        <table>
+        <table className="tableDiv">
           <thead>
-            <tr>
+            <tr className="tableHead">
               <th>Descrição</th>
               <th>Tag</th>
               <th>Método de pagamento</th>
@@ -35,7 +25,7 @@ class Table extends Component {
           </thead>
           <tbody>
             {expenses.map((e) => (
-              <tr key={ e.id }>
+              <tr className="tableHead" key={ e.id }>
                 <td>{e.description}</td>
                 <td>{e.tag}</td>
                 <td>{e.method}</td>
@@ -44,21 +34,19 @@ class Table extends Component {
                 <td>{Number((e.exchangeRates[e.currency].ask)).toFixed(2)}</td>
                 <td>{Number((e.exchangeRates[e.currency].ask) * e.value).toFixed(2)}</td>
                 <td>{e.exchangeRates[e.currency].name}</td>
-                <td>
-                  <button
-                    data-testid="delete-btn"
-                    type="button"
-                    onClick={ () => this.btnDelete(e) }
-                  >
-                    Delete
-                  </button>
-                  <button
-                    data-testid="edit-btn"
-                    type="button"
-                    onClick={ () => this.btnEdit(e) }
-                  >
-                    Edit
-                  </button>
+                <td className="buttonsDiv">
+                  <Button
+                    dataTestid="edit-btn"
+                    name="Editar"
+                    classDiv="edit"
+                    bill={ e.id }
+                  />
+                  <Button
+                    dataTestid="delete-btn"
+                    name="Excluir"
+                    classDiv="delete"
+                    bill={ e.id }
+                  />
                 </td>
               </tr>
             ))}
@@ -83,7 +71,7 @@ Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   // currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   exchangeRates: PropTypes.shape({}).isRequired,
-  dispatch: PropTypes.func.isRequired,
+  // dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Table);

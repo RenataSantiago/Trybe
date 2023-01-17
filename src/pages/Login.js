@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userData } from '../redux/actions';
+import '../styles/App.css';
+import '../styles/Login.css';
 
 class Login extends React.Component {
   state = {
     email: '',
     password: '',
     buttonIsDisabled: true,
+    className: 'loginButton disabled',
   };
 
   handleChange = ({ target }) => {
@@ -30,41 +33,58 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const six = 6;
     if (email.includes('@') && email.includes('.com') && password.length >= six) {
-      this.setState({ buttonIsDisabled: false });
+      this.setState({ buttonIsDisabled: false, className: 'loginButton' });
     } else {
-      this.setState({ buttonIsDisabled: true });
+      this.setState({ buttonIsDisabled: true, className: 'loginButton disabled' });
     }
   };
 
   render() {
-    const { email, password, buttonIsDisabled } = this.state;
+    const { email, password, buttonIsDisabled, className } = this.state;
     return (
-      <form>
-        Email
-        <input
-          data-testid="email-input"
-          type="email"
-          name="email"
-          value={ email }
-          onChange={ this.handleChange }
-        />
-        <br />
-        <br />
-        Senha
-        <input
-          data-testid="password-input"
-          type="password"
-          name="password"
-          value={ password }
-          onChange={ this.handleChange }
-        />
-        <button
-          type="submit"
-          disabled={ buttonIsDisabled }
-          onClick={ this.handleClick }
+      <form
+        className="login"
+      >
+        <div
+          className="loginForm"
         >
-          Entrar
-        </button>
+          <h1>Trybe Wallet</h1>
+          <label htmlFor="email" className="loginLabel">
+            Email
+            <input
+              id="email"
+              className="loginInputs"
+              data-testid="email-input"
+              type="email"
+              name="email"
+              value={ email }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <br />
+          <br />
+          <label htmlFor="senha" className="loginLabel">
+            Senha
+            <input
+              id="senha"
+              className="loginInputs"
+              data-testid="password-input"
+              type="password"
+              name="password"
+              value={ password }
+              onChange={ this.handleChange }
+            />
+          </label>
+          <br />
+          <button
+            className={ className }
+            type="submit"
+            disabled={ buttonIsDisabled }
+            onClick={ this.handleClick }
+          >
+            Entrar
+          </button>
+        </div>
       </form>
     );
   }

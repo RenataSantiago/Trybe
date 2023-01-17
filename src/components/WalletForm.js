@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { despesa, walletData, walletDataThunk } from '../redux/actions';
+import '../styles/WalletForm.css';
 
 class WalletForm extends Component {
   state = {
@@ -11,6 +12,8 @@ class WalletForm extends Component {
     tag: 'Alimentação',
     description: '',
     toEdit: false,
+    className: 'walletButton',
+    clicked: false,
   };
 
   componentDidMount() {
@@ -20,10 +23,19 @@ class WalletForm extends Component {
 
   componentDidUpdate() {
     const { dispatch, editor } = this.props;
+    const { clicked } = this.state;
     if (editor) {
       this.setState({ toEdit: true });
       dispatch(walletData({ editor: false }));
       this.editXablau();
+    }
+    if (clicked) {
+      const TIME = 200;
+      const timer = setInterval(() => {
+        this.setState({ className: 'walletButton', clicked: false }, () => {
+          clearInterval(timer);
+        });
+      }, TIME);
     }
   }
 
@@ -45,7 +57,8 @@ class WalletForm extends Component {
       exchangeRates,
       id: expensesID,
     }];
-    this.setState({ value: '', description: '' });
+    this.setState({
+      value: '', description: '', clicked: true, className: 'walletButton clicked' });
     dispatch(despesa({ expenses: arr }));
     dispatch(walletDataThunk());
   };
@@ -63,11 +76,17 @@ class WalletForm extends Component {
       exchangeRates,
       id: idToEdit,
     }];
+    // arr2.sort((a, b) => ((a.id < b.id) ? 1 : -1));
     const array = [...arr2];
     arr2.forEach((element, i) => {
       array[i] = arr2.find((e) => i === e.id);
     });
-    this.setState({ value: '', description: '', toEdit: false });
+    this.setState({
+      value: '',
+      description: '',
+      toEdit: false,
+      clicked: true,
+      className: 'walletButton clicked' });
     dispatch(despesa({ expenses: array }));
   };
 
@@ -85,25 +104,36 @@ class WalletForm extends Component {
   }
 
   render() {
-    const { value, currency, method, tag, description, toEdit } = this.state;
+    const { value, currency, method, tag, description, toEdit, className } = this.state;
     const { currencies } = this.props;
     return (
-      <div>
-        <input
-          data-testid="value-input"
-          type="number"
-          name="value"
-          value={ value }
-          onChange={ this.handleChange }
-        />
-        <input
-          data-testid="description-input"
-          type="text"
-          name="description"
-          value={ description }
-          onChange={ this.handleChange }
-        />
+      <div className="walletDiv">
+        <label htmlFor="valor" className="walletLabel">
+          Valor:
+          <input
+            className="walletInputs"
+            id="valor"
+            data-testid="value-input"
+            type="number"
+            name="value"
+            value={ value }
+            onChange={ this.handleChange }
+          />
+        </label>
+        <label htmlFor="description" className="walletLabel">
+          Descrição:
+          <input
+            id="description"
+            className="walletInputs"
+            data-testid="description-input"
+            type="text"
+            name="description"
+            value={ description }
+            onChange={ this.handleChange }
+          />
+        </label>
         <select
+          className="walletSelects"
           data-testid="currency-input"
           name="currency"
           value={ currency }
@@ -114,6 +144,7 @@ class WalletForm extends Component {
           ))}
         </select>
         <select
+          className="walletSelects"
           data-testid="method-input"
           name="method"
           value={ method }
@@ -124,6 +155,7 @@ class WalletForm extends Component {
           <option>Cartão de débito</option>
         </select>
         <select
+          className="walletSelects"
           data-testid="tag-input"
           name="tag"
           value={ tag }
@@ -136,6 +168,7 @@ class WalletForm extends Component {
           <option>Saúde</option>
         </select>
         <button
+          className={ className }
           type="button"
           onClick={ !toEdit ? this.handleClick : this.handleEdit }
         >

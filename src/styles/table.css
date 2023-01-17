@@ -1,0 +1,60 @@
+.tableDiv {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 0;
+  width: 100%;
+}
+
+.tableHead {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+th , td {
+  align-items: center;
+  background-color: rgb(230, 230, 230);
+  border: 0;
+  box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.5),
+    inset -3px -3px 3px rgba(150, 150, 150, 0.6);
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: center;
+  padding: 5px;
+  width: 10%;
+}
+
+th {
+  background-color: rgba(10, 50, 30, 0.5);
+  color: white;
+}
+
+.buttonsDiv {
+  background: none;
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: space-around;
+}
+
+.tableButtons {
+  align-items: center;
+  align-self: center;
+  background-color: rgb(230, 230, 230);
+  border: 0;
+  box-shadow: inset 3px 3px 3px rgba(150, 150, 150, 0.5),
+    inset -3px -3px 3px rgba(0, 0, 0, 0.6);
+  color: black;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  text-decoration-color: aliceblue;
+}
+
+.edit {
+  background-color: rgb(100, 200, 200);
+}
+
+.delete {
+  background-color: orangered;
+}

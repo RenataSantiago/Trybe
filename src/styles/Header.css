@@ -1,0 +1,51 @@
+.header {
+  align-self: center;
+  background-color: rgba(10, 50, 30, 0.5);
+  border-bottom: 1px solid orangered;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.userDiv {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.currencyDiv {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.user {
+  color: white;
+  margin: 10px 20px;
+  padding: 5px;
+}
+
+.exitButton {
+  background-color: orangered;
+  border: 1px black solid;
+  box-shadow: inset 5px 5px 5px rgba(150, 150, 150, 0.5),
+  inset -5px 5px 5px rgba(0, 0, 0, 0.5);
+  color: white;
+  margin: 10px 50px 10px 10px;
+  padding: 5px;
+  text-decoration-color: aliceblue;
+}
+
+#qtd {
+  color: white;
+  margin: 10px 20px;
+}
+
+#currency {
+  color: white;
+  margin: 10px 40px 10px 10px;
+}
+
