@@ -1,6 +1,6 @@
 .header {
   align-self: center;
-  background-color: rgba(10, 50, 30, 0.5);
+  background-color: rgba(0, 0, 0, 0.966);
   border-bottom: 1px solid orangered;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
 }
 
 .user {
-  color: white;
+  color: rgb(246, 247, 253);
   margin: 10px 20px;
   padding: 5px;
 }
@@ -32,7 +32,7 @@
   background-color: orangered;
   border: 1px black solid;
   box-shadow: inset 5px 5px 5px rgba(150, 150, 150, 0.5),
-  inset -5px 5px 5px rgba(0, 0, 0, 0.5);
+    inset -5px 5px 5px rgba(0, 0, 0, 0.5);
   color: white;
   margin: 10px 50px 10px 10px;
   padding: 5px;
